@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<form>
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label" for="currency">From</label>
+			<div class="col-sm-3">
+				<select class="form-select" id="currency">
+					<option>EUR</option>
+					<option>USD</option>
+					<option>THB</option>
+				</select>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label class="col-sm-2 col-form-label" for="amount">Amount</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="amount" placeholder="">
+			</div>
+		</div>
+		<button type="submit" class="offset-md-2 btn btn-primary">Convert</button>
+	</form>
+{% endblock %}
