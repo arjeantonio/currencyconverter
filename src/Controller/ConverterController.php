@@ -12,6 +12,8 @@ class ConverterController extends AbstractController
     #[Route('/converter', name: 'app_converter', methods:['GET','HEAD'])]
     public function index(): Response
     {
-        return $this->render('converter/index.html.twig');
+        return $this->render('converter/index.html.twig', [
+            'controller_name' => 'ConverterController',
+        ]);
     }
 }

@@ -72,7 +72,7 @@ vhost_type:
   # Normal vHost (-p)
   docroot: |
     # Define the vhost to serve files
-    root         /shared/httpd/currencyconvertor/public;
+    root         /shared/httpd/currencyconverter/public;
     index        __INDEX__;
 
   # Reverse Proxy (-r http(s)://ADDR:PORT)
