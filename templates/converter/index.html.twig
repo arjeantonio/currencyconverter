@@ -1,23 +1,41 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Currency converter
+{% endblock %}
+
 {% block body %}
-	<form>
-		<div class="row mb-3">
-			<label class="col-sm-2 col-form-label" for="currency">From</label>
-			<div class="col-sm-3">
-				<select class="form-select" id="currency">
-					<option>EUR</option>
-					<option>USD</option>
-					<option>THB</option>
-				</select>
-			</div>
+	{{ form_errors(conversionForm) }}
+
+	{{ form_start(conversionForm) }}
+	{{ form_row(conversionForm.currency) }}
+	{{ form_row(conversionForm.amount) }}
+	<div class="mb-3 row">
+		<div class="col-sm-2 offset-md-2">
+			<button type="submit" class="btn btn-primary">Convert</button>
 		</div>
-		<div class="row mb-3">
-			<label class="col-sm-2 col-form-label" for="amount">Amount</label>
-			<div class="col-sm-3">
-				<input type="text" class="form-control" id="amount" placeholder="">
-			</div>
-		</div>
-		<button type="submit" class="offset-md-2 btn btn-primary">Convert</button>
-	</form>
+	</div>
+	{{ form_end(conversionForm) }}
+
+	{% if (convertedValues) %}
+		<p>Converted into currencies:</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="table-active">Currency</th>
+					{# Empty cell for formatting #}
+					{% for conversion in convertedValues %}
+						<th>{{ conversion.target_currency }}</th>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="table-active">Value</td>
+					{% for conversion in convertedValues %}
+						<td>{{ conversion.converted_value }}</td>
+					{% endfor %}
+				</tr>
+			</tbody>
+		</table>
+	{% endif %}
 {% endblock %}
