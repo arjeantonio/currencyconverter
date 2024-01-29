@@ -24,7 +24,7 @@ class Exchange
     #[ORM\Column(length: 3)]
     private ?string $target_currency = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 10)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 40, scale: 20)]
     private ?string $rate = null;
 
     #[ORM\Column(type: Types::DATETIMETZ_MUTABLE)]

@@ -18,24 +18,26 @@
 
 	{% if (convertedValues) %}
 		<p>Converted into currencies:</p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="table-active">Currency</th>
-					{# Empty cell for formatting #}
-					{% for conversion in convertedValues %}
-						<th>{{ conversion.target_currency }}</th>
-					{% endfor %}
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class="table-active">Value</td>
-					{% for conversion in convertedValues %}
-						<td>{{ conversion.converted_value }}</td>
-					{% endfor %}
-				</tr>
-			</tbody>
-		</table>
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="table-active">Currency</th>
+						{# Empty cell for formatting #}
+						{% for conversion in convertedValues %}
+							<th>{{ conversion.target_currency }}</th>
+						{% endfor %}
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="table-active">Value</td>
+						{% for conversion in convertedValues %}
+							<td>{{ conversion.converted_value }}</td>
+						{% endfor %}
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	{% endif %}
 {% endblock %}

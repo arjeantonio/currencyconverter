@@ -19,6 +19,18 @@ composer install
 npm install
 ```
 
+## Import
+
+To import/update the exchange rates use the following commands:
+
+```shell
+# Import for a single currency
+symfony console exchangerates:update EUR
+
+# Import for all currecies.
+symfony console exchangerates:update --all
+```
+
 ## Tests
 
 Test-driven-development using unit tests.
