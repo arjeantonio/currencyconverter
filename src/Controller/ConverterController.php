@@ -22,7 +22,7 @@ class ConverterController extends AbstractController
             $sourceCurrency = $form->get('currency')->getData();
             $amount = $form->get('amount')->getData();
             $amount = str_replace(',', '.', $amount);
-            $convertedValues = $converterService->convertValuesForSourceCurrency($sourceCurrency, $amount);
+            $convertedValues = $converterService->convertBySourceCurrency($sourceCurrency, $amount);
         }
 
         return $this->render('converter/index.html.twig', [

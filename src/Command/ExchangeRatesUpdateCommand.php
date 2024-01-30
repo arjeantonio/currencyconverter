@@ -17,15 +17,15 @@ use Symfony\Component\Console\Helper\ProgressBar;
     name: 'exchangerates:update',
     description: 'Manage exchangerates',
 )]
-class ExchangeRatesCommand extends Command
+class ExchangeRatesUpdateCommand extends Command
 {
     private $exchangeRateManagerService;
 
-    public function __construct(ExchangeRateManagerService $ExchangeRateManagerService)
+    public function __construct(ExchangeRateManagerService $exchangeRateManagerService)
     {
         parent::__construct();
 
-        $this->exchangeRateManagerService = $ExchangeRateManagerService;
+        $this->exchangeRateManagerService = $exchangeRateManagerService;
     }
 
     protected function configure(): void
@@ -48,20 +48,19 @@ class ExchangeRatesCommand extends Command
         }
 
         $currencyCodes = [];
-        if ($currencyCode){
+        if ($currencyCode) {
             $currencyCodes[] = $currencyCode;
         }
 
-        if ($importAll){
+        if ($importAll) {
             $currencyCodes = $this->exchangeRateManagerService->getAvailableCurrencies();
         }
         $this->updateCurrenciesByCodes($currencyCodes, $output);
         $io->success(sprintf('Rates imported for %s record(s)', count($currencyCodes)));
 
-        return Command::SUCCESS;  
-        
+        return Command::SUCCESS;
     }
-    
+
     /**
      * updateCurrenciesByCodes
      *
@@ -69,9 +68,10 @@ class ExchangeRatesCommand extends Command
      * @param  OutputInterface $output
      * @return bool
      */
-    private function updateCurrenciesByCodes(array $currencyCodes, OutputInterface $output): bool{
+    private function updateCurrenciesByCodes(array $currencyCodes, OutputInterface $output): bool
+    {
         $progressBar = new ProgressBar($output, count($currencyCodes));
-        foreach ($currencyCodes as $currency){
+        foreach ($currencyCodes as $currency) {
             $this->exchangeRateManagerService->updateExchangeRate($currency);
             $progressBar->advance();
         }
@@ -79,7 +79,7 @@ class ExchangeRatesCommand extends Command
 
         return true;
     }
-    
+
     /**
      * isValidCurrencyCode
      *

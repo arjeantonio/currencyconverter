@@ -39,6 +39,10 @@ security:
     access_control:
         - { path: ^/converter, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }
+services:
+    App\EventListener\WhitelistEntryListener:
+        arguments:
+            $whitelistRepository: App\Repository\WhitelistEntryRepository
 
 when@test:
     security:

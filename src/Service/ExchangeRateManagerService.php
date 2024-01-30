@@ -17,14 +17,15 @@ class ExchangeRateManagerService
         $this->exchangeRateClientService = $ExchangeRateClientService;
         $this->entityManager = $entityManager;
     }
-    
+
     /**
      * getAvailableCurrencies
      *
      * @return array
      */
-    public function getAvailableCurrencies(): array{
-        
+    public function getAvailableCurrencies(): array
+    {
+
         return $this->exchangeRateClientService->fetchAvailableCurrencies();
     }
 
@@ -38,13 +39,13 @@ class ExchangeRateManagerService
     {
         $availableCurrencies = $this->getAvailableCurrencies();
 
-        foreach ($availableCurrencies as $currency){
+        foreach ($availableCurrencies as $currency) {
             $this->updateExchangeRate($currency);
         }
 
         return true;
     }
-    
+
     /**
      * updateExchangeRate
      *
@@ -58,7 +59,6 @@ class ExchangeRateManagerService
 
         // Write result
         foreach ($exchangeRates as $data) {
-
             $existingExchange = $this->entityManager->getRepository(Exchange::class)
                 ->findOneBy(['source_currency' => $currency, 'target_currency' => $data['code']]);
 
@@ -79,7 +79,7 @@ class ExchangeRateManagerService
                 $this->entityManager->persist($exchange);
             }
         }
-        
+
         $this->entityManager->flush();
 
         return true;
