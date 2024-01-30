@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Currency converter
+{% endblock %}
+
+{% block body %}
+	{{ form_errors(conversionForm) }}
+
+	{{ form_start(conversionForm) }}
+	{{ form_row(conversionForm.currency) }}
+	{{ form_row(conversionForm.amount) }}
+	<div class="mb-3 row">
+		<div class="col-sm-2 offset-md-2">
+			<button type="submit" class="btn btn-primary">Convert</button>
+		</div>
+	</div>
+	{{ form_end(conversionForm) }}
+
+	{% if (convertedValues) %}
+		<p>Converted into currencies:</p>
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="table-active">Currency</th>
+						{# Empty cell for formatting #}
+						{% for conversion in convertedValues %}
+							<th>{{ conversion.target_currency }}</th>
+						{% endfor %}
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="table-active">Value</td>
+						{% for conversion in convertedValues %}
+							<td>{{ conversion.converted_value }}</td>
+						{% endfor %}
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	{% endif %}
+{% endblock %}
